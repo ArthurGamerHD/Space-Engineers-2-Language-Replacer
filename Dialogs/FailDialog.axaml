@@ -1,0 +1,37 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SE2_Language_Replacer.FailDialog"
+        TransparencyLevelHint="Mica"
+        SizeToContent="WidthAndHeight"
+        CanResize="False"
+        Name="Dialog"
+        Padding="16"
+        Title="Falha">
+    <Grid RowDefinitions="auto auto">
+        <TextBlock Grid.RowSpan="1" Margin="16 32">
+            <TextBlock.Styles>
+                <Style Selector="InlineUIContainer > TextBlock">
+                    <Setter Property="FontWeight" Value="ExtraLight" />
+                    <Setter Property="TextDecorations" Value="Underline" />
+                    <Style Selector="^:pointerover">
+                        <Setter Property="Foreground" Value="{DynamicResource TextBlock-Hyperlink-Active}" />
+                    </Style>
+                </Style>
+            </TextBlock.Styles>
+            <Run Text="Falha ao instalar, Por Favor, envie o arquivo de log no" />
+            <InlineUIContainer>
+                <TextBlock PointerReleased="Url_OnPointerReleased" Text="Github">
+                </TextBlock>
+            </InlineUIContainer>
+        </TextBlock>
+        <Grid Grid.Row="1" ColumnDefinitions="* *" >
+            <Button Grid.Column="0" MinWidth="64" Command="{Binding #Dialog.Close}" HorizontalAlignment="Center">Ok</Button>
+            <Button Grid.Column="1" MinWidth="64" Click="Log_OnClick" HorizontalAlignment="Center">Log</Button>
+        </Grid>
+        
+
+    </Grid>
+</Window>

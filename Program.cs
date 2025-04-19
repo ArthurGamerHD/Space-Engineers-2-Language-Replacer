@@ -1,5 +1,7 @@
 ﻿using Avalonia;
 using System;
+using Avalonia.Logging;
+using SE2_Language_Replacer.Lib;
 
 namespace SE2_Language_Replacer;
 

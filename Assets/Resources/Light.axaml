@@ -1,0 +1,74 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <SolidColorBrush x:Key='LogoForegroundBrush'>Black</SolidColorBrush>
+
+    <Color x:Key="Secondary">#5f5b5d</Color>
+    <Color x:Key="Highlight">#E08B0E</Color>
+    <Color x:Key="HighContrast">#FFFFFF</Color>
+    <Color x:Key="Disabled">#a3a1a2</Color>
+    <Color x:Key="Background">#fefefe</Color>
+    <Color x:Key="BackgroundLight">#fbfafb</Color>
+    <Color x:Key="Black">#000000</Color>
+    <Color x:Key="Warning">#FFDB1D</Color>
+    <Color x:Key="Error">#FF1D08</Color>
+    <Color x:Key="HighContrast95">#80FFFFFF</Color>
+    
+    <!-- ********************* Buttons Brushes ********************* -->
+    <!-- Button Background-->
+    <SolidColorBrush x:Key="Button-Background" Color="{DynamicResource Background}" />
+    <SolidColorBrush x:Key="Button-Background-Focus" Color="{DynamicResource BackgroundLight}" />
+    <SolidColorBrush x:Key="Button-Background-Disabled" Color="{DynamicResource Disabled}" />
+    <SolidColorBrush x:Key="Button-Background-Active" Color="{DynamicResource Highlight}" />
+    
+    <!-- Menu Button Background -->
+    <SolidColorBrush x:Key="Menu-Button-Background" Color="{DynamicResource BackgroundLight}" />
+    <SolidColorBrush x:Key="Menu-Button-Background-Focus" Color="{DynamicResource BackgroundLight}" />
+    <SolidColorBrush x:Key="Menu-Button-Background-Disabled" Color="{DynamicResource BackgroundLight}" />
+    <SolidColorBrush x:Key="Menu-Button-Background-Active" Color="{DynamicResource Highlight}" />
+    
+    <!-- Button Stroke-->
+    <SolidColorBrush x:Key="Button-Stroke" Color="{DynamicResource Secondary}" />
+    <SolidColorBrush x:Key="Button-Stroke-Focus" Color="{DynamicResource Highlight}" />
+    <SolidColorBrush x:Key="Button-Stroke-Disabled" Color="{DynamicResource Background}" />
+    <SolidColorBrush x:Key="Button-Stroke-Active" Color="{DynamicResource Highlight}" />
+
+    <!-- Button Text-->
+    <SolidColorBrush x:Key="Button-Text" Color="{DynamicResource Black}" />
+    <SolidColorBrush x:Key="Button-Text-Focus" Color="{DynamicResource Black}" />
+    <SolidColorBrush x:Key="Button-Text-Disabled" Color="{DynamicResource Secondary}" />
+    <SolidColorBrush x:Key="Button-Text-Active" Color="{DynamicResource Black}" />
+    
+    <!-- ********************* TextBoxs Brushes ********************* -->
+    <!-- TextBox Background-->
+    <SolidColorBrush x:Key="TextBox-Background" Color="{DynamicResource Background}" />
+    <SolidColorBrush x:Key="TextBox-Background-Focus" Color="{DynamicResource Background}" />
+    <SolidColorBrush x:Key="TextBox-Background-Disabled" Color="{DynamicResource Disabled}" />
+    <SolidColorBrush x:Key="TextBox-Background-Active" Color="{DynamicResource Highlight}" />
+    
+    <!-- Menu TextBox Background -->
+    <SolidColorBrush x:Key="Menu-TextBox-Background" Color="{DynamicResource BackgroundLight}" />
+    <SolidColorBrush x:Key="Menu-TextBox-Background-Focus" Color="{DynamicResource BackgroundLight}" />
+    <SolidColorBrush x:Key="Menu-TextBox-Background-Disabled" Color="{DynamicResource BackgroundLight}" />
+    <SolidColorBrush x:Key="Menu-TextBox-Background-Active" Color="{DynamicResource Highlight}" />
+    
+    <!-- TextBox Stroke-->
+    <SolidColorBrush x:Key="TextBox-Stroke" Color="{DynamicResource Secondary}" />
+    <SolidColorBrush x:Key="TextBox-Stroke-Focus" Color="{DynamicResource Highlight}" />
+    <SolidColorBrush x:Key="TextBox-Stroke-Disabled" Color="{DynamicResource Background}" />
+    <SolidColorBrush x:Key="TextBox-Stroke-Active" Color="{DynamicResource Highlight}" />
+
+    <!-- TextBox Text-->
+    <SolidColorBrush x:Key="TextBox-Text" Color="{DynamicResource Black}" />
+    <SolidColorBrush x:Key="TextBox-Text-Focus" Color="{DynamicResource Black}" />
+    <SolidColorBrush x:Key="TextBox-Text-Disabled" Color="{DynamicResource Secondary}" />
+    <SolidColorBrush x:Key="TextBox-Text-Active" Color="{DynamicResource Black}" />
+    
+    <!-- Window Background -->
+    <SolidColorBrush x:Key="Window-Background" Color="{DynamicResource HighContrast}" />
+    <SolidColorBrush x:Key="Window-Background-Mica" Color="{DynamicResource HighContrast95}" />
+    
+    <!-- TextBlock Text-->
+    <SolidColorBrush x:Key="TextBlock-Hyperlink-Active" Color="{DynamicResource Highlight}" />
+    
+</ResourceDictionary>
