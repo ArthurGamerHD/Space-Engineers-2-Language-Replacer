@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Dialogs;
 using Avalonia.Input;
@@ -51,10 +53,33 @@ public partial class MainWindow : Window
         }
     }
 
+    public MainWindow()
+    {
+        if (!Design.IsDesignMode)
+            throw new InvalidOperationException("Empty Constructor should only be used in Design Mode.");
+
+        InitializeComponent();
+        InitializeContext();
+    }
+
+
+    private bool _translationPathValid;
+    private bool _gamePathValid;
+
     public MainWindow(ILogger? log = null)
     {
-        _log = log;
         InitializeComponent();
+
+#if DEBUG
+        this.AttachDevTools();
+#endif
+
+        InitializeContext(log);
+    }
+
+    public void InitializeContext(ILogger? log = null)
+    {
+        _log = log;
 
         TryFindSpaceEngineers2Path();
         CheckIfHasAnyTranslationOnStartup();
@@ -96,7 +121,7 @@ public partial class MainWindow : Window
                         if (hasLocTextsFile == null)
                         {
                             hasLocTextsFile = zipFile;
-                            _log?.LogInformation($"Found file: {entry.FullName}");
+                            _log?.LogInformation($"Found translation file: {Path.GetFileName(zipFile)}");
                         }
 
                         else // more than one file found, user must decide which one to use
@@ -130,25 +155,28 @@ public partial class MainWindow : Window
             Constants.SpaceEngineers2AppId);
 
         if (!string.IsNullOrEmpty(lib))
+        {
             GamePath = Path.Combine(lib, Constants.DefaultGamePath);
+
+            _log?.LogInformation("Game path found at \"{path}\\\"", GamePath);
+
+            if (!_gamePathValid)
+                _log?.LogWarning(
+                    "Path does not appears to be a valid \"Space Engineers 2\" Installation. Manual intervention is required");
+        }
     }
 
     private string? TryGetSteamFolder()
     {
-        string installPath32 =
-            ReadRegistryValue(RegistryHive.LocalMachine, Constants.SteamRegistryPath32, "InstallPath");
-
-        if (!string.IsNullOrEmpty(installPath32))
+        if (ReadRegistryValue(Constants.SteamRegistryPath32, Constants.SteamRegistryInstall) is {} installPath && !string.IsNullOrEmpty(installPath))
         {
-            _log?.LogInformation($"32-bit Steam found at: {installPath32}");
-            return installPath32;
+            _log?.LogInformation($"32-bit Steam found at \"{installPath}\\\"");
+            return installPath;
         }
-
-        string installPath64 =
-            ReadRegistryValue(RegistryHive.LocalMachine, Constants.SteamRegistryPath64, "InstallPath");
-        if (!string.IsNullOrEmpty(installPath64))
+        
+        if (ReadRegistryValue(Constants.SteamRegistryPath64, Constants.SteamRegistryInstall) is {} installPath64 && !string.IsNullOrEmpty(installPath64))
         {
-            _log?.LogInformation($"64-bit Steam found at: {installPath32}");
+            _log?.LogInformation($"64-bit Steam found at\"{installPath64}\\\"");
             return installPath64;
         }
 
@@ -169,59 +197,39 @@ public partial class MainWindow : Window
                 string pathPattern = @"\""path\""\s+\""(.+?)\""";
                 Match pathMatch = Regex.Match(libraryContent, pathPattern);
                 if (pathMatch.Success)
-                    return pathMatch.Groups[1].Value.Replace("\\\\", "\\");
+                {
+                    var lib = pathMatch.Groups[1].Value.Replace("\\\\", "\\");
+                    _log?.LogInformation("Game with AppID {appId} found at \"{path}\\\"", appId, lib);
+                    return lib;
+                }
             }
         }
 
         return null;
     }
 
-    static string ReadRegistryValue(RegistryHive hive, string subKey, string valueName)
+    static string? ReadRegistryValue(string subKey, string valueName)
     {
+        RegistryView[] registryViews = [RegistryView.Registry32, RegistryView.Registry64];
+
         try
         {
-            // Check 32-bit registry view
-            using (RegistryKey key = RegistryKey.OpenBaseKey(hive, RegistryView.Registry32))
+            foreach (var view in registryViews)
             {
-                using (RegistryKey subKeyHandle = key.OpenSubKey(subKey))
-                {
-                    if (subKeyHandle != null)
-                    {
-                        var value = subKeyHandle.GetValue(valueName);
-                        if (value is string)
-                        {
-                            return value as string;
-                        }
-                    }
-                }
-            }
-
-            // Check 64-bit registry view
-            using (RegistryKey key = RegistryKey.OpenBaseKey(hive, RegistryView.Registry64))
-            {
-                using (RegistryKey subKeyHandle = key.OpenSubKey(subKey))
-                {
-                    if (subKeyHandle != null)
-                    {
-                        var value = subKeyHandle.GetValue(valueName);
-                        if (value is string)
-                        {
-                            return value as string;
-                        }
-                    }
-                }
+                using RegistryKey key = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, view);
+                using RegistryKey? subKeyHandle = key.OpenSubKey(subKey);
+                var value = subKeyHandle?.GetValue(valueName);
+                if (value is string s)
+                    return s;
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error reading registry value: {ex.Message}");
+            _log?.LogError($"Error reading registry value: {ex.Message}");
         }
 
-        return null; // Return null if the value is not found or an error occurs
+        return null; // Neither 32 bits or 64 bits key were found
     }
-
-    private bool _translationPathValid = false;
-    private bool _gamePathValid = false;
 
     private async void PickGameLocation(object? sender, RoutedEventArgs routedEventArgs)
     {
@@ -232,7 +240,7 @@ public partial class MainWindow : Window
 
     private async void PickTranslationLocation(object? sender, RoutedEventArgs e)
     {
-        TranslationPath = await PickFile("translation file", "*.zip") ?? TranslationPath;
+        TranslationPath = await PickFile(".zip", "*.zip") ?? TranslationPath;
     }
 
     public void ValidateGamePath()
@@ -249,7 +257,6 @@ public partial class MainWindow : Window
         InvalidGamePath.IsVisible = !_gamePathValid;
         InstallButton.IsEnabled = _gamePathValid && _translationPathValid;
     }
-
 
     public void ValidateTranslationPath()
     {
@@ -316,11 +323,18 @@ public partial class MainWindow : Window
                     Dispatcher.UIThread.Post(() =>
                     {
                         ProgressBar.IsVisible = false;
-                        
+
                         if (success)
+                        {
                             new SuccessDialog().ShowDialog(this);
+                            _log?.LogInformation("Successfully installed localization.");
+                        }
+
                         else
+                        {
                             new FailDialog().ShowDialog(this);
+                            _log?.LogError("Failure. Please send this file to {github}.", Constants.GithubLink);
+                        }
                     });
                 });
 
@@ -425,12 +439,14 @@ public partial class MainWindow : Window
         }
     }
 
+    [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "<Pending>")]
+    [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "<Pending>")]
     static void GenerateDefinition(string id, Dictionary<string, string> guids, string gamePath)
     {
         string jsonString = File.ReadAllText(GetLocDefPath(gamePath));
         JsonNode? jsonNode = JsonNode.Parse(jsonString);
 
-        var contentpath = GetContentPath(gamePath);
+        var contentPath = GetContentPath(gamePath);
 
         if (jsonNode is null)
             throw new JsonException();
@@ -440,7 +456,7 @@ public partial class MainWindow : Window
 
         foreach (var (path, uid) in guids)
         {
-            _log?.LogInformation($"Creating new entry for: {path[contentpath.Length..]} - {uid}");
+            _log?.LogInformation($"Creating new entry for: {path[contentPath.Length..]} - {uid}");
 
             resources?.AsArray().Add(new JsonObject
             {
@@ -453,7 +469,7 @@ public partial class MainWindow : Window
             });
         }
 
-#if ADD_AS_NEW
+#if ADD_AS_NEW // i'm limited by the technology of my time, this is not yet possible
         var guid = Guid.NewGuid().ToString();
 #else
         var guid = "df143f5b-70d0-4ccd-8da2-fc1336a83772";
@@ -468,6 +484,8 @@ public partial class MainWindow : Window
         PopulateCache(id, guid, guids, gamePath, Constants.CacheReferenceFile);
     }
 
+    [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "<Pending>")]
+    [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "<Pending>")]
     public static void PopulateCache(string id, string guid, Dictionary<string, string> guids, string gamePath,
         string cacheFile)
     {

@@ -4,18 +4,18 @@
     <SolidColorBrush x:Key='LogoForegroundBrush'>White</SolidColorBrush>
     
     <Color x:Key="Primary">#95B0B7</Color>
-    <Color x:Key="Secondary">#627C83</Color>
+    <Color x:Key="Secondary">#4c4c4c</Color>
     <Color x:Key="Highlight">#E08B0E</Color>
     <Color x:Key="HighContrast">#FFFFFF</Color>
     <Color x:Key="Disabled">#636363</Color>
-    <Color x:Key="Passive">#093B49</Color>
-    <Color x:Key="PassiveDark">#132122</Color>
-    <Color x:Key="Background">#00202B</Color>
-    <Color x:Key="BackgroundDark">#080e11</Color>
+    <Color x:Key="Passive">#323232</Color>
+    <Color x:Key="PassiveDark">#242424</Color>
+    <Color x:Key="Background">#272727</Color>
+    <Color x:Key="BackgroundDark">#202020</Color>
     <Color x:Key="Black">#000000</Color>
     <Color x:Key="Warning">#FFDB1D</Color>
     <Color x:Key="Error">#FF1D08</Color>
-    <Color x:Key="Black95">#BF080808</Color>
+    <Color x:Key="Black95">#BF202020</Color>
     
     <!-- ********************* Buttons Brushes ********************* -->
     <!-- Button Background-->
@@ -50,7 +50,7 @@
     <SolidColorBrush x:Key="TextBox-Background-Active" Color="{DynamicResource Highlight}" />
     
     <!-- Menu TextBox Background -->
-    <SolidColorBrush x:Key="Menu-TextBox-Background" Color="{DynamicResource BackgroundDark}" />
+    <SolidColorBrush x:Key="Menu-TextBox-Background" Color="{DynamicResource Secondary}" />
     <SolidColorBrush x:Key="Menu-TextBox-Background-Focus" Color="{DynamicResource BackgroundDark}" />
     <SolidColorBrush x:Key="Menu-TextBox-Background-Disabled" Color="{DynamicResource BackgroundDark}" />
     <SolidColorBrush x:Key="Menu-TextBox-Background-Active" Color="{DynamicResource Highlight}" />
@@ -68,8 +68,13 @@
     <SolidColorBrush x:Key="TextBox-Text-Active" Color="{DynamicResource Black}" />
     
     <!-- Window Background -->
-    <SolidColorBrush x:Key="Window-Background" Color="{DynamicResource Black}" />
+    <SolidColorBrush x:Key="Window-Background" Color="{DynamicResource BackgroundDark}" />
     <SolidColorBrush x:Key="Window-Background-Mica" Color="{DynamicResource Black95}" />
+    
+    <!-- Border Styles -->
+    <SolidColorBrush x:Key="Border-Background" Color="{DynamicResource Background}" />
+    <SolidColorBrush x:Key="Border-Background-Light" Color="{DynamicResource Passive}" />
+    <SolidColorBrush x:Key="Border-Background-Decor" Color="{DynamicResource Highlight}" />
     
     <!-- TextBlock Text-->
     <SolidColorBrush x:Key="TextBlock-Hyperlink-Active" Color="{DynamicResource Highlight}" />

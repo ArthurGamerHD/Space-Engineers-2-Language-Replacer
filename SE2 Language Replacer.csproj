@@ -6,6 +6,13 @@
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <BuiltInComInteropSupport>false</BuiltInComInteropSupport>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <PublishSingleFile>true</PublishSingleFile>
+        <PublishTrimmed>true</PublishTrimmed>
+        <TrimMode>full</TrimMode>
+        <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
+        <PublishAot>false</PublishAot>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,24 +25,36 @@
             <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0-preview.3.25171.5" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.0-preview.3.25171.5" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0-preview.3.25171.5"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.0-preview.3.25171.5"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="pt-BR.zip">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+        <None Update="pt-BR.zip">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Dialogs\SuccessDialog.axaml.cs">
-        <DependentUpon>SuccessDialog.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Dialogs\FailDialog.axaml.cs">
-        <DependentUpon>FailDialog.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
+        <Compile Update="Dialogs\SuccessDialog.axaml.cs">
+            <DependentUpon>SuccessDialog.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Dialogs\FailDialog.axaml.cs">
+            <DependentUpon>FailDialog.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Localization\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Localization\Resources.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 </Project>

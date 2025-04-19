@@ -12,7 +12,7 @@
             <ControlTemplate>
                 <DataValidationErrors>
                     <Panel>
-                        <lib1:BeveledBorder
+                        <Border
                             Name="PART_BorderElement"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -20,9 +20,9 @@
                             CornerRadius="{TemplateBinding CornerRadius}"
                             MinWidth="{TemplateBinding MinWidth}"
                             MinHeight="{TemplateBinding MinHeight}">
-                        </lib1:BeveledBorder>
+                        </Border>
 
-                        <lib1:BeveledBorder
+                        <Border
                             Margin="{TemplateBinding BorderThickness}">
                             <Grid ColumnDefinitions="Auto,*,Auto">
                                 <ContentPresenter Grid.Column="0"
@@ -91,7 +91,7 @@
                                                   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   Content="{TemplateBinding InnerRightContent}" />
                             </Grid>
-                        </lib1:BeveledBorder>
+                        </Border>
                     </Panel>
                 </DataValidationErrors>
             </ControlTemplate>
@@ -99,7 +99,7 @@
     </Style>
 
     <Style Selector="TextBox">
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="MinHeight" Value="40" />
         <Setter Property="MinWidth" Value="42" />
@@ -115,7 +115,7 @@
 
         <!-- Focus -->
         <Style Selector="^:focus, ^:pointerover, ^:flyout-open">
-            <Style Selector="^ /template/ lib1|BeveledBorder#PART_BorderElement">
+            <Style Selector="^ /template/ Border#PART_BorderElement">
                 <Setter Property="Background" Value="{DynamicResource TextBox-Background-Focus}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource TextBox-Stroke-Focus}" />
             </Style>
@@ -123,7 +123,7 @@
 
         <!-- Disabled -->
         <Style Selector="^:disabled">
-            <Style Selector="^ /template/ lib1|BeveledBorder#PART_BorderElement">
+            <Style Selector="^ /template/ Border#PART_BorderElement">
                 <Setter Property="Background" Value="{DynamicResource TextBox-Background-Disabled}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource TextBox-Stroke-Disabled}" />
             </Style>
@@ -131,7 +131,7 @@
 
         <!-- Active -->
         <Style Selector="^:pressed">
-            <Style Selector="^ /template/ lib1|BeveledBorder#PART_BorderElement">
+            <Style Selector="^ /template/ Border#PART_BorderElement">
                 <Setter Property="Background" Value="{DynamicResource TextBox-Background-Active}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource TextBox-Stroke-Active}" />
             </Style>

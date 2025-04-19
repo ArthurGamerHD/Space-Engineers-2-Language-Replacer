@@ -10,6 +10,10 @@
         <Setter Property="Background" Value="{DynamicResource Window-Background}" />
     </Style>
 
+    <Style Selector=":is(Window):not(:focus)">
+        <Setter Property="TransparencyLevelHint" Value="None" />
+    </Style>
+    
     <Style Selector=":is(Window)[ActualTransparencyLevel=Mica]">
         <Setter Property="Background" Value="{DynamicResource Window-Background-Mica}" />
     </Style>

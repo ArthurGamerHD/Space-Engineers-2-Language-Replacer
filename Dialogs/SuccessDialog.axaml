@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:loc="clr-namespace:SE2_Language_Replacer.Localization"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SE2_Language_Replacer.SuccessDialog"
         TransparencyLevelHint="Mica"
@@ -9,9 +10,10 @@
         CanResize="False"
         Name="Dialog"
         Padding="16"
-        Title="Sucesso">
+        x:CompileBindings="True"
+        Title="{x:Static loc:Resources.SuccessTitle}">
         <Grid RowDefinitions="auto auto">
-                <TextBlock Text="Instalado com sucesso" Margin="16 32"/>
+                <TextBlock Text="{x:Static loc:Resources.SuccessMessage}" Margin="16 32"/>
                 <Button Grid.Row="1" MinWidth="64" Command="{Binding #Dialog.Close}" HorizontalAlignment="Center">Ok</Button>
         </Grid>
 </Window>

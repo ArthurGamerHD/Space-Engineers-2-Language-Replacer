@@ -35,6 +35,10 @@ public static class Constants
     
     public const string SteamRegistryPath32 = @"SOFTWARE\Valve\Steam";
     public const string SteamRegistryPath64 = @"SOFTWARE\Wow6432Node\Valve\Steam";
+    
+    public const string SteamRegistryInstall = "InstallPath";
 
     public const string SpaceEngineers2AppId = "1133870";
+
+    public const string GithubLink = "https://github.com/ArthurGamerHD/Space-Engineers-2-Tradu--o-pt_BR/issues";
 }

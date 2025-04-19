@@ -12,7 +12,7 @@
     <Color x:Key="Black">#000000</Color>
     <Color x:Key="Warning">#FFDB1D</Color>
     <Color x:Key="Error">#FF1D08</Color>
-    <Color x:Key="HighContrast95">#80FFFFFF</Color>
+    <Color x:Key="HighContrast95">#00202020</Color>
     
     <!-- ********************* Buttons Brushes ********************* -->
     <!-- Button Background-->
@@ -67,6 +67,11 @@
     <!-- Window Background -->
     <SolidColorBrush x:Key="Window-Background" Color="{DynamicResource HighContrast}" />
     <SolidColorBrush x:Key="Window-Background-Mica" Color="{DynamicResource HighContrast95}" />
+    
+    <!-- Border Styles -->
+    <SolidColorBrush x:Key="Border-Background" Color="{DynamicResource Background}" />
+    <SolidColorBrush x:Key="Border-Background-Light" Color="{DynamicResource BackgroundLight}" />
+    <SolidColorBrush x:Key="Border-Background-Decor" Color="{DynamicResource Highlight}" />
     
     <!-- TextBlock Text-->
     <SolidColorBrush x:Key="TextBlock-Hyperlink-Active" Color="{DynamicResource Highlight}" />

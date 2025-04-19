@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="MainTitle" xml:space="preserve">
+        <value>SE2 LOCALIZE</value>
+    </data>
+    <data name="GamePathError" xml:space="preserve">
+        <value>This path does not appears to contain a valid Space Engineers 2 Installation</value>
+    </data>
+    <data name="LocPathError" xml:space="preserve">
+        <value>This file does not appears to be a valid localization file</value>
+    </data>
+    <data name="SelectLocFile" xml:space="preserve">
+        <value>Select a localization file</value>
+    </data>
+    <data name="SelectGamePath" xml:space="preserve">
+        <value>Select the Space Engineers 2 Executable</value>
+    </data>
+    <data name="SuccessTitle" xml:space="preserve">
+        <value>Success</value>
+    </data>
+    <data name="ErrorTitle" xml:space="preserve">
+        <value>Fail</value>
+    </data>
+    <data name="ErrorMessage" xml:space="preserve">
+        <value>Fail on install, please, report and send the log file on my </value>
+    </data>
+    <data name="SuccessMessage" xml:space="preserve">
+        <value>Installed successfully</value>
+    </data>
+    <data name="Install" xml:space="preserve">
+        <value>Install</value>
+    </data>
+</root>

@@ -1,9 +1,10 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <StyleInclude Source="Window.axaml"/>
-    <StyleInclude Source="BeveledBorders.axaml"/>
+    <StyleInclude Source="Border.axaml"/>
     <StyleInclude Source="Buttons.axaml"/>
+    <StyleInclude Source="ProgressBar.axaml"/>
     <StyleInclude Source="TextBox.axaml"/>
+    <StyleInclude Source="Window.axaml"/>
 
 </Styles>

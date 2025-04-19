@@ -4,14 +4,9 @@ using Microsoft.Extensions.Logging;
 
 namespace SE2_Language_Replacer.Lib;
 
-public class FileLoggerProvider : ILoggerProvider
+public class FileLoggerProvider(StreamWriter logFileWriter) : ILoggerProvider
 {
-    private readonly StreamWriter _logFileWriter;
-
-    public FileLoggerProvider(StreamWriter logFileWriter)
-    {
-        _logFileWriter = logFileWriter ?? throw new ArgumentNullException(nameof(logFileWriter));
-    }
+    private readonly StreamWriter _logFileWriter = logFileWriter ?? throw new ArgumentNullException(nameof(logFileWriter));
 
     public ILogger CreateLogger(string categoryName)
     {
@@ -36,10 +31,12 @@ public class FileLogger : ILogger
         _logFileWriter = logFileWriter;
     }
 
-    public IDisposable BeginScope<TState>(TState state)
+#pragma warning disable CS8633 // Nullability in constraints for type parameter doesn't match the constraints for type parameter in implicitly implemented interface method'.
+    public  IDisposable? BeginScope<TState>(TState state)
     {
         return null;
     }
+#pragma warning restore CS8633 // Nullability in constraints for type parameter doesn't match the constraints for type parameter in implicitly implemented interface method'.
 
     public bool IsEnabled(LogLevel logLevel)
     {
@@ -51,8 +48,8 @@ public class FileLogger : ILogger
         LogLevel logLevel,
         EventId eventId,
         TState state,
-        Exception exception,
-        Func<TState, Exception, string> formatter)
+        Exception? exception,
+        Func<TState, Exception?, string> formatter)
     {
         // Ensure that only information level and higher logs are recorded
         if (!IsEnabled(logLevel))

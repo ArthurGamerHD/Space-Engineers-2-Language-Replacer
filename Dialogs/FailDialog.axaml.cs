@@ -21,7 +21,7 @@ public partial class FailDialog : Window
 
     private void Url_OnPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo("https://github.com/ArthurGamerHD/Space-Engineers-2-Tradu--o-pt_BR/issues")
+        Process.Start(new ProcessStartInfo(Constants.GithubLink)
             { UseShellExecute = true });
     }
 }

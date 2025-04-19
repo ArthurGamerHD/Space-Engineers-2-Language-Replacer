@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:loc="clr-namespace:SE2_Language_Replacer.Localization"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SE2_Language_Replacer.FailDialog"
         TransparencyLevelHint="Mica"
@@ -9,7 +10,8 @@
         CanResize="False"
         Name="Dialog"
         Padding="16"
-        Title="Falha">
+        x:CompileBindings="True"
+        Title="{x:Static loc:Resources.ErrorTitle}">
     <Grid RowDefinitions="auto auto">
         <TextBlock Grid.RowSpan="1" Margin="16 32">
             <TextBlock.Styles>
@@ -21,7 +23,7 @@
                     </Style>
                 </Style>
             </TextBlock.Styles>
-            <Run Text="Falha ao instalar, Por Favor, envie o arquivo de log no" />
+            <Run Text="{x:Static loc:Resources.ErrorMessage}" />
             <InlineUIContainer>
                 <TextBlock PointerReleased="Url_OnPointerReleased" Text="Github">
                 </TextBlock>
