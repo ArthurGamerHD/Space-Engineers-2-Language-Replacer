@@ -40,5 +40,5 @@ public static class Constants
 
     public const string SpaceEngineers2AppId = "1133870";
 
-    public const string GithubLink = "https://github.com/ArthurGamerHD/Space-Engineers-2-Tradu--o-pt_BR/issues";
+    public const string GithubLink = "https://github.com/ArthurGamerHD/Space-Engineers-2-Language-Replacer/issues/new";
 }
